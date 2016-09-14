@@ -5,7 +5,7 @@ module FileDb
 
     def initialize(data_file)
       file = File.read(data_file)
-      @data = JSON.parse(file)
+      @data = JSON.parse(file, {symbolized_names: true})
     end
 
 
@@ -13,5 +13,8 @@ module FileDb
       @data.keys.sort
     end
 
+    def table(table_name)
+      FileDb::Table.new(@data[table_name])
+    end
   end
 end
