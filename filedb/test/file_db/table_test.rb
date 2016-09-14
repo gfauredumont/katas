@@ -31,12 +31,17 @@ class FileDb::TableTest < Minitest::Test
     assert_equal([1, 2, 4], movies_ids)
   end
 
-
   def test_insert_returns_entry_with_encremented_id
     new_movie = { title: "Birds", year: 1962, director_id: 2 }
-    assert(true, { id: 7, title: "Birds", year: 1962, director_id: 2 } == @movies.insert(new_movie))
+    assert({ "id" => 7, "title" => "Birds", "year" => 1962, "director_id" => 2 } == @movies.insert(new_movie))
     assert_equal(7, @movies.select.count)
   end
 
+  def test_update_returns_updated_entry
+    new_movie = { title: "Birds", year: 1962, director_id: 2 }
+    @movies.insert(new_movie)
+    updated_movie = { "id" => 7, "title" => "Birds", "year" => 1963, "director_id" => 2 }
+    assert(updated_movie == @movies.update(where: { id: 7 }, values: { year: 1963 }))
+  end
 
 end
