@@ -1,3 +1,4 @@
+require 'pry'
 module FileDb
   class Table
     def initialize(data)
@@ -5,12 +6,9 @@ module FileDb
     end
 
     def select(where: nil)
-      if where
-        @data.first
-      else
-        @data
-      end
+      return @data unless where && where.keys.first
+      key = where.keys.first
+      @data.select{ |v| v[key.to_s] == where[key]}
     end
-
   end
 end

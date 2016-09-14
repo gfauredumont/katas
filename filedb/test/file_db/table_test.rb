@@ -22,7 +22,14 @@ class FileDb::TableTest < Minitest::Test
   end
 
   def test_select_where_id_1_returns_first_movie
-    assert_equal(@first_movie, @movies.select(where: { id: 1 }))
+    assert_equal([@first_movie], @movies.select(where: { id: 1 }))
   end
+
+  def test_select_where_director_id_1_returns_movies_1_2_4
+    movies = @movies.select(where: { director_id: 1 })
+    movies_ids = movies.map { |m| m["id"]}
+    assert_equal([1, 2, 4], movies_ids)
+  end
+
 
 end
