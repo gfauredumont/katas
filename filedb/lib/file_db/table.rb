@@ -4,8 +4,13 @@ module FileDb
       @data = data
     end
 
-    def select
-      @data
+    def select(where: nil)
+      if where
+        @data.first
+      else
+        @data
+      end
     end
+
   end
 end

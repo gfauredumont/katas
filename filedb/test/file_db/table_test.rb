@@ -20,4 +20,9 @@ class FileDb::TableTest < Minitest::Test
   def test_select_first_returns_first_movie
     assert_equal(@first_movie, @movies.select.first)
   end
+
+  def test_select_where_id_1_returns_first_movie
+    assert_equal(@first_movie, @movies.select(where: { id: 1 }))
+  end
+
 end
