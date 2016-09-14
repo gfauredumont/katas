@@ -32,4 +32,11 @@ class FileDb::TableTest < Minitest::Test
   end
 
 
+  def test_insert_returns_entry_with_encremented_id
+    new_movie = { title: "Birds", year: 1962, director_id: 2 }
+    assert(true, { id: 7, title: "Birds", year: 1962, director_id: 2 } == @movies.insert(new_movie))
+    assert_equal(7, @movies.select.count)
+  end
+
+
 end

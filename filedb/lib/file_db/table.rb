@@ -1,4 +1,5 @@
 require 'pry'
+
 module FileDb
   class Table
     def initialize(data)
@@ -10,5 +11,17 @@ module FileDb
       key = where.keys.first
       @data.select{ |v| v[key.to_s] == where[key]}
     end
+
+    def insert(entry_hash)
+      entry_hash['id'] = max_id + 1
+      @data << entry_hash
+      entry_hash
+    end
+
+    private
+
+      def max_id
+        @data.max_by { |e| e['id'] }['id']
+      end
   end
 end
