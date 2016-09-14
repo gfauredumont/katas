@@ -1,1 +1,7 @@
 Gemfile.lock
+.env.db
+.env.web
+Dockerfile
+docker-compose.yml
+run.sh
+.gitignore
